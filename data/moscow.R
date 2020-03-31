@@ -1,4 +1,5 @@
 library(tidyverse)
+source("scripts\\misc.R")
 
 moscow_load <- function(){
   first_date <- as.Date("7/03/20", format = "%d/%m/%y")
@@ -73,7 +74,7 @@ moscow_load <- function(){
   
   moscow_data <- cases_data %>%  mutate(type = "Доклад") %>%
     bind_rows(model_data %>%
-                mutate(type = "Модель"))
+                mutate(type = "Модель")) %>% add_daily_percent()
   
   return(list(moscow_data, model_text))
   

@@ -55,7 +55,7 @@ daily_cases_graph <- function(data, name = "Москве", dates_div = 2){
   length_dates <- data %>% filter(type == "Доклад") %>% select(dates) %>% .[[1]] %>% length()
   
   data %>% filter(type == "Доклад") %>%
-    ggplot(aes(x = dates, y = new_cases)) + geom_col() + 
+    ggplot(aes(x = dates, y = new_cases, color)) + geom_col() + 
     scale_x_date(breaks=pretty_breaks(n = length_dates/dates_div)) + 
     labs(
       y="Новые случаи", 
@@ -64,4 +64,18 @@ daily_cases_graph <- function(data, name = "Москве", dates_div = 2){
       caption = paste("tg: @covidcharts.", max(max_date))) + theme_light()
 }
 
+
+daily_percent_graph <- function(data, name = "Москве", dates_div = 2){
+  max_date <- data %>% filter(type == "Доклад") %>% select(dates) %>% .[[1]] %>% max()
+  length_dates <- data %>% filter(type == "Доклад") %>% select(dates) %>% .[[1]] %>% length()
+  
+  data %>% filter(type == "Доклад") %>%
+    ggplot(aes(x = dates, y = daily_percent, color)) + geom_col() + 
+    scale_x_date(breaks=pretty_breaks(n = length_dates/dates_div)) + 
+    labs(
+      y="Процент новых случаев от существущих", 
+      x="День", 
+      title=paste("Процент новых случаев заражения от существующих случаев в", name),
+      caption = paste("tg: @covidcharts.", max(max_date))) + theme_light()
+}
 
