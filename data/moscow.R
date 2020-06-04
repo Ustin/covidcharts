@@ -1,10 +1,12 @@
 library(tidyverse)
-source("scripts\\misc.R")
+source("scripts\\misc.R", encoding = "UTF-8")
 
 moscow_load <- function(){
-  first_date <- as.Date("7/03/20", format = "%d/%m/%y")
+  first_date <- as.Date("5/03/20", format = "%d/%m/%y")
   reported_cases_new_wiki <- c(
-    5, #8
+    5,
+    0,
+    0, #8
     3, #9
     0,
     6,
@@ -26,7 +28,72 @@ moscow_load <- function(){
     157,
     114,
     197,
-    212
+    212,
+    387,
+    267,
+    595,
+    448,
+    434,
+    536,
+    591,
+    697,
+    660,
+    857,
+    1124,
+    1030,
+    1306,
+    1355,
+    1489,
+    1774,
+    1370,
+    1959,
+    2649,
+    3570,
+    2026,
+    3083,
+    2548,
+    1959,
+    2957,
+    2612,
+    2971,
+    2871,
+    3075,
+    2220, 
+    3093,
+    3561,
+    5358,
+    5948,
+    5795,
+    5714,
+    5858,
+    6703,
+    5846,
+    5667,
+    5551,
+    6169,
+    5392,
+    4703,
+    4712,
+    4748,
+    3505,
+    3855,
+    3238,
+    3545,
+    2699,
+    2913,
+    2988,
+    3190,
+    2516,
+    2560,
+    2830,
+    2140,
+    2054,
+    2332,
+    2367,
+    2596, 
+    2297,
+    2286,
+    1842
   )
   
   reported_cases_wiki <-cumsum(reported_cases_new_wiki)
@@ -58,23 +125,29 @@ moscow_load <- function(){
   model_text <- paste("Модель:", round(start_cases,1), 
                       "*", round(case_mult,2), "^(число дней с начала)")
   
-  cases_data <- tibble(
-    dates = report_dates,
-    cases = reported_cases,
-    new_cases = new_cases
-  )
+  #cases_data <- tibble(
+  #  dates = report_dates,
+  #  cases = reported_cases,
+  #  new_cases = new_cases
+  #)
   
   model_cases <- start_cases*case_mult**(0:(length(reported_cases)-1+predict_days))
   model_dates <- first_date + 1:length(model_cases)
   
-  model_data <- tibble(
+  #model_data <- tibble(
+  #  dates = model_dates,
+  #  cases = model_cases
+  #)
+  
+  cases_data <- tibble(
     dates = model_dates,
-    cases = model_cases
+    cases = c(reported_cases, rep(NA,predict_days)),
+    new_cases = c(new_cases, rep(NA,predict_days)),
+    model_cases = model_cases
   )
   
-  moscow_data <- cases_data %>%  mutate(type = "Доклад") %>%
-    bind_rows(model_data %>%
-                mutate(type = "Модель")) %>% add_daily_percent()
+  moscow_data <- cases_data %>%  
+    add_daily_percent() #%>% add_25_percent()
   
   return(list(moscow_data, model_text))
   
