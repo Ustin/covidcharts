@@ -91,7 +91,7 @@ combined_daily_cases_graph <- function(data, dates_div = 2){
   length_dates <- data %>% select(dates) %>% .[[1]] %>% length()
   
   data %>% 
-    ggplot(aes(x = dates, y = cases, fill = factor(type, levels = c("Россия", "Москва")))) + 
+    ggplot(aes(x = dates, y = cases, fill = factor(type, levels = c("Москва", "Россия")))) + 
     geom_bar(stat="identity", position = "stack") + 
     scale_x_date(breaks=pretty_breaks(n = length_dates/dates_div)) + 
     #geom_text(aes(y = cases, label=cases), vjust=-0.5, color="black")+
