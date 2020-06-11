@@ -38,7 +38,7 @@ moscow_mortality %>% ggplot(aes(x = Month, y = Deaths, group = Year, color = Yea
   theme(axis.title.y = element_text(size = 12))+ 
   theme(panel.grid.major = element_line(color = "#C0C0C0")) +
   theme(plot.caption = element_text(size = 12))+
-  labs(x = "", y = "Смерти от всех причин",
+  labs(x = "", y = "Смерти",
        caption = "telegram: @covidcharts\n\nИсточники: Портал открытых данных правительства Москвы, Депздрав Москвы",
        title = "Смертность в Москве от всех причин")+ labs(color = "Год")
 
