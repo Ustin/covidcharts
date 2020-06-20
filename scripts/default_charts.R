@@ -22,3 +22,5 @@ russia_data %>% filter(dates > as.Date("05/04/20", format = "%d/%m/%y")) %>% dai
 moscow_data %>% filter(dates > as.Date("30/03/20", format = "%d/%m/%y")) %>% daily_percent_graph("Москве")
 
 russia_data %>% filter(dates > as.Date("15/03/20", format = "%d/%m/%y")) %>% log_cases_graph_new(subtitle = "И продолжение тренда на десять дней")
+
+ggsave("test.png")
