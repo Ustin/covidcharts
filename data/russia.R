@@ -1,7 +1,7 @@
 # данные по России
 library(tidyverse)
 
-source("scripts\\misc.R", encoding = "UTF-8")
+source(file.path("scripts/misc.R"), encoding = "UTF-8")
 
 russia_load <- function(){
   
@@ -114,7 +114,11 @@ russia_load <- function(){
     569063,
     576952,
     584680,
-    592280
+    592280,
+    599705,
+    606881,
+    613994,
+    620794
   )
   predict_days <- 0
   
