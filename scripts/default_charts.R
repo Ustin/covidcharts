@@ -23,4 +23,4 @@ russia_data %>% drop_na(cases) %>% select(-model_cases_new) %>% combine_cases(mo
 
 #russia_data %>% filter(dates > as.Date("15/03/20", format = "%d/%m/%y")) %>% log_cases_graph_new(subtitle = "И продолжение тренда на десять дней")
 
-ggsave("test.png")
+ggsave("test.png", width = 12, height = 8)
