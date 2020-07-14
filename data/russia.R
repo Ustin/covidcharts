@@ -134,7 +134,9 @@ russia_load <- function(){
     707301,
     713936,
     720547,
-    727162
+    727162,
+    733699,
+    739947
   )
   predict_days <- 0
   
@@ -143,9 +145,10 @@ russia_load <- function(){
   
   report_dates <- first_date + 1:(length(reported_cases))
   
-  
-  
-  base_model2 <- nls(reported_cases ~ start_cases*case_mult**(as.integer(report_dates-report_dates[1])), 
+  reported_cases_temp <- reported_cases[1:10]
+  report_dates_temp <- report_dates[1:10]
+  report_dates_first <- report_dates[1]
+  base_model2 <- nls(reported_cases_temp ~ start_cases*case_mult**(as.integer(report_dates_temp-report_dates_first)), 
                      start = list(start_cases = 14, case_mult = 1.1))
   
   sum_base_model <- summary(base_model2)
