@@ -188,7 +188,16 @@ moscow_load <- function(){
     690,
     692,
     671,
-    620
+    620,
+    690,
+    695,
+    642,
+    695,
+    698,
+    670,
+    650,
+    696,
+    730
   )
   
   reported_cases_wiki <-cumsum(reported_cases_new_wiki)
@@ -205,7 +214,10 @@ moscow_load <- function(){
   #base_model <- nls(reported_cases ~ offset_cases + start_cases*case_mult**(as.integer(report_dates-report_dates[1])), 
   #                  start = list(offset_cases = 0, start_cases = 14, case_mult = 1.1))
   
-  base_model2 <- nls(reported_cases ~ start_cases*case_mult**(as.integer(report_dates-report_dates[1])), 
+  reported_cases_temp <- reported_cases[1:10]
+  report_dates_temp <- report_dates[1:10]-report_dates[1]
+  
+  base_model2 <- nls(reported_cases_temp ~ start_cases*case_mult**(as.integer(report_dates_temp)), 
                      start = list(start_cases = 14, case_mult = 1.1))
   
   
