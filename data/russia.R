@@ -209,7 +209,9 @@ russia_load <- function(){
     1115810,
     1122241,
     1128836,
-    1136048
+    1136048,
+    1143571,
+    1151438
   )
   predict_days <- 0
   
@@ -260,14 +262,14 @@ russia_load <- function(){
   
   dates3 <- as.integer(data_model3$dates-data_model3$dates[1])
   
-  base_model3 <- nls(cases3 ~ start_cases3*case_mult3**(dates3), 
-                     start = list(start_cases3 = 4000, case_mult3 = 1.1))
+  base_model3 <- base_model2# nls(cases3 ~ start_cases3*case_mult3**(dates3), 
+                     #start = list(start_cases3 = 4000, case_mult3 = 1.1))
   
   sum_base_model3 <- summary(base_model3)
   
-  start_cases3 <- sum_base_model3$coefficients["start_cases3","Estimate"]
+  start_cases3 <- start_cases# sum_base_model3$coefficients["start_cases3","Estimate"]
   
-  case_mult3 <- sum_base_model3$coefficients["case_mult3","Estimate"]
+  case_mult3 <- case_mult# sum_base_model3$coefficients["case_mult3","Estimate"]
   
   model_cases3 <- start_cases3*case_mult3**(0:(length(cases3)-1+predict_days))
   model_dates3 <- data_model3$dates[1] + 1:length(cases3)
