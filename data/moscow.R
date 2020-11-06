@@ -247,7 +247,9 @@ moscow_load <- function(){
     5261,
     4796,
     5150,
-    5826
+    5826,
+    5255,
+    6253
   )
   
   reported_cases_wiki <-cumsum(reported_cases_new_wiki)
